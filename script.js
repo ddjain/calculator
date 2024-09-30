@@ -1,6 +1,5 @@
-let doughnutChart; // Global variable to store the current doughnut chart instance
+let doughnutChart; 
 
-// Fetch inputs and buttons
 const principalInput = document.getElementById('principal');
 const rateInput = document.getElementById('rate');
 const yearsInput = document.getElementById('years');
@@ -8,12 +7,38 @@ const saveButton = document.getElementById('saveBtn');
 const historyButton = document.getElementById('historyBtn');
 const historySection = document.getElementById('historySection');
 
+// Display fields
+const investedDisplay = document.getElementById('investedDisplay');
+const returnDisplay = document.getElementById('returnDisplay');
+const totalDisplay = document.getElementById('totalDisplay');
+
 // Add event listeners to update the calculation when values change
 principalInput.addEventListener('input', calculateAndUpdate);
 rateInput.addEventListener('input', calculateAndUpdate);
 yearsInput.addEventListener('input', calculateAndUpdate);
 saveButton.addEventListener('click', saveCalculation);
 historyButton.addEventListener('click', toggleHistorySection);
+
+// Add event listeners to sliders
+document.getElementById('principalSlider').addEventListener('input', syncPrincipal);
+document.getElementById('rateSlider').addEventListener('input', syncRate);
+document.getElementById('yearsSlider').addEventListener('input', syncYears);
+
+// Sync the slider and input fields
+function syncPrincipal(e) {
+    principalInput.value = e.target.value;
+    calculateAndUpdate();
+}
+
+function syncRate(e) {
+    rateInput.value = e.target.value;
+    calculateAndUpdate();
+}
+
+function syncYears(e) {
+    yearsInput.value = e.target.value;
+    calculateAndUpdate();
+}
 
 // Trigger calculation with default values
 calculateAndUpdate();
@@ -45,6 +70,11 @@ function calculateAndUpdate() {
 
     // Populate table
     populateTable(yearWiseBreakdown);
+
+    // Animate the text change
+    animateNumberChange(investedDisplay, principal);
+    animateNumberChange(returnDisplay, totalInterestEarned);
+    animateNumberChange(totalDisplay, totalAmount);
 }
 
 function updateDoughnutChart(invested, interestEarned, totalAmount) {
@@ -67,6 +97,10 @@ function updateDoughnutChart(invested, interestEarned, totalAmount) {
         options: {
             responsive: true,
             cutout: '70%', 
+            animation: {
+                animateRotate: true,
+                animateScale: true
+            },
             plugins: {
                 tooltip: {
                     callbacks: {
@@ -96,13 +130,13 @@ function updateDoughnutChart(invested, interestEarned, totalAmount) {
                     const height = chart.height;
                     ctx.restore();
 
-                    const fontSize = (height / 114).toFixed(2);
+                    const fontSize = (height / 190).toFixed(2);
                     ctx.font = `${fontSize}em sans-serif`;
                     ctx.textBaseline = 'middle';
 
                     const text = chart.config.options.plugins.centerText.text;
                     const textX = Math.round((width - ctx.measureText(text).width) / 2);
-                    const textY = height / 2;
+                    const textY = (height / 2) + 30;
 
                     ctx.fillText(text, textX, textY);
                     ctx.save();
@@ -125,6 +159,27 @@ function populateTable(data) {
         `;
         tableBody.appendChild(tr);
     });
+}
+
+// Function to animate number change
+function animateNumberChange(element, value) {
+    const startValue = parseFloat(element.innerText.replace('₹', '')) || 0;
+    const endValue = value;
+    const duration = 500;  // Animation duration in milliseconds
+    const startTime = performance.now();
+
+    function updateNumber(timestamp) {
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const currentValue = startValue + (endValue - startValue) * progress;
+        element.innerText = currentValue.toFixed(2);
+
+        if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+        }
+    }
+
+    requestAnimationFrame(updateNumber);
 }
 
 // Function to save the calculation into localStorage

@@ -1,111 +1,134 @@
-/* General styling for mobile responsiveness */
+/* Basic styling for the container, card, and inputs */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-    overflow-x: hidden;
+    background-color: #f0f0f0;
 }
 
 .container {
-    padding: 15px;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
 }
 
-/* Make inputs and buttons touch-friendly */
-input, button {
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.input-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.input-group input[type="number"],
+input[type="range"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 1.1em;
+    padding: 8px;
+    margin-bottom: 5px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+.result-display {
+    margin-bottom: 20px;
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-button:active {
-    background-color: #45a049;
+.result-item {
+    flex: 1;
+    margin-right: 10px;
 }
 
-/* Make the canvas (chart) responsive */
-canvas {
-    width: 100% !important;
-    max-width: 100%;
-    height: auto !important;
+.graph-section {
+    width: 400px;
+    flex: 1;
 }
 
-/* Ensure the table is responsive */
+.breakdown-container, .history-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 15px 0;
+    margin-top: 15px;
 }
 
 table th, table td {
-    padding: 8px 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    font-size: 0.9em;
-}
-
-/* Responsive table: allow horizontal scroll if content overflows */
-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-/* History section responsiveness */
-#historySection {
-    padding: 15px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 8px;
+    text-align: center;
 }
 
+table th {
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+    .card-box {
+        flex-direction: column;
+    }
+
+    .graph-section {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .result-item {
+        margin-bottom: 10px;
+    }
+}
+
+/* Hidden sections */
 .hidden {
     display: none;
 }
 
-/* Make the buttons on the top more prominent for mobile */
-#historyBtn, #saveBtn {
-    font-size: 1.2em;
-    padding: 12px;
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
     width: 100%;
     margin-top: 10px;
 }
 
-/* Add some margin for better spacing on mobile */
-input, button, table {
-    margin-top: 15px;
-}
-
-/* Typography adjustments for smaller screens */
-@media (max-width: 600px) {
-    h2 {
-        font-size: 1.4em;
-    }
-
-    table th, table td {
-        font-size: 0.8em;
-    }
-
-    #historyBtn, #saveBtn {
-        font-size: 1.1em;
-        padding: 10px;
-    }
-
-    input, button {
-        font-size: 1em;
-        padding: 8px;
-    }
+button:hover {
+    background-color: #45a049;
 }
