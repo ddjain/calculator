@@ -134,7 +134,7 @@ function updateDoughnutChart(invested, interestEarned, totalAmount) {
                     ctx.font = `${fontSize}em sans-serif`;
                     ctx.textBaseline = 'middle';
 
-                    const text = chart.config.options.plugins.centerText.text;
+                    const text = formatCurrency(chart.config.options.plugins.centerText.text);
                     const textX = Math.round((width - ctx.measureText(text).width) / 2);
                     const textY = (height / 2) + 30;
 
@@ -228,4 +228,25 @@ function populateHistoryTable() {
         `;
         historyTableBody.appendChild(tr);
     });
+}
+function formatCurrency(amount) {
+    // Convert the amount to a string
+    let numStr = amount.toString();
+
+    // Split the string into the integer part and decimal part (if any)
+    let [integerPart, decimalPart] = numStr.split('.');
+
+    // Use a regular expression to add commas
+    let lastThreeDigits = integerPart.slice(-3);
+    let otherDigits = integerPart.slice(0, -3);
+    
+    if (otherDigits) {
+        lastThreeDigits = ',' + lastThreeDigits;
+    }
+    
+    // Use regex to add commas for the thousands part
+    let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThreeDigits;
+
+    // If there's a decimal part, join it back
+    return decimalPart ? formattedIntegerPart + '.' + decimalPart : formattedIntegerPart;
 }
