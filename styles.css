@@ -1,0 +1,111 @@
+/* General styling for mobile responsiveness */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Make inputs and buttons touch-friendly */
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+button:active {
+    background-color: #45a049;
+}
+
+/* Make the canvas (chart) responsive */
+canvas {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Ensure the table is responsive */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+table th, table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9em;
+}
+
+/* Responsive table: allow horizontal scroll if content overflows */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* History section responsiveness */
+#historySection {
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Make the buttons on the top more prominent for mobile */
+#historyBtn, #saveBtn {
+    font-size: 1.2em;
+    padding: 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Add some margin for better spacing on mobile */
+input, button, table {
+    margin-top: 15px;
+}
+
+/* Typography adjustments for smaller screens */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.4em;
+    }
+
+    table th, table td {
+        font-size: 0.8em;
+    }
+
+    #historyBtn, #saveBtn {
+        font-size: 1.1em;
+        padding: 10px;
+    }
+
+    input, button {
+        font-size: 1em;
+        padding: 8px;
+    }
+}
